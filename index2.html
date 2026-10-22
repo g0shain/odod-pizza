@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — ODOD PIZZA</title>
+    <link rel="stylesheet" href="pizza.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .login-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 42px;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .login-logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        .login-logo-text span { color: #764ba2; }
+
+        .login-logo-subtitle {
+            font-size: 13px;
+            color: #999;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-message {
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success { color: #4a9428; display: block; }
+        .form-message.error { color: #c92c39; display: block; }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .login-footer a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover { text-decoration: underline; }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .back-link:hover { color: #764ba2; }
+
+        .hint-box {
+            margin-top: 20px;
+            padding: 12px 15px;
+            background: #f4f2fb;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #764ba2;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .hint-box strong { color: #1a1a1a; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+
+        <div class="login-logo">
+            <div class="login-logo-icon">🍕</div>
+            <div class="login-logo-text">ODOD <span>PIZZA</span></div>
+            <div class="login-logo-subtitle">Доставка пиццы №1</div>
+        </div>
+
+        <h2>Вход в систему</h2>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text" id="login" name="login" placeholder="Введите логин" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+            </div>
+            <button type="submit" class="login-btn">Войти</button>
+            <div class="form-message" id="formMessage"></div>
+        </form>
+
+        <div class="login-footer">
+            Нет аккаунта? <a href="registration.html">Зарегистрироваться</a>
+        </div>
+        <a href="main.html" class="back-link">← Вернуться на главную</a>
+
+        <div class="hint-box">
+            <strong>Тестовые аккаунты:</strong><br>
+            admin / admin123<br>
+            ivan / qwerty<br>
+            maria / 12345
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

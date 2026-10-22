@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль — ODOD PIZZA</title>
+    <link rel="stylesheet" href="pizza.css">
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <a href="main.html" class="logo">
+                <div class="logo-icon">🍕</div>
+                <div class="logo-text">ODOD <span>PIZZA</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="main.html">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="discounts.html">Акции</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="tel:+79991234567" class="nav-phone">+7 (999) 123-45-67</a>
+                <div id="authBlock"></div>
+                <a href="basket.html" class="cart-btn" title="Корзина">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Мой <span>профиль</span></h1>
+        <p id="profileSubtitle">Загрузка...</p>
+    </section>
+
+    <section class="profile-section" id="profileContent">
+        <!-- Рендерится через JS -->
+    </section>
+
+    <!-- МОДАЛКА ОТЗЫВА -->
+    <div class="drink-modal-overlay" id="reviewModal">
+        <div class="drink-modal">
+            <h2>Оставить <span>отзыв</span></h2>
+            <p>Оцените заказ и напишите комментарий</p>
+
+            <div class="star-rating" id="starRating">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="reviewComment">Комментарий</label>
+                <textarea id="reviewComment" placeholder="Расскажите, как вам заказ..." rows="4"
+                          style="width:100%; padding:12px 15px; border:2px solid #e0e0e0; border-radius:10px; font-size:14px; outline:none; font-family:inherit; resize:vertical;"></textarea>
+            </div>
+
+            <div class="promo-message" id="reviewMessage"></div>
+
+            <button class="checkout-btn" id="reviewSubmitBtn" style="margin-top: 15px;">Отправить отзыв</button>
+            <button class="drink-modal-close" onclick="closeReviewModal()">Отмена</button>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА ОТВЕТА НА FEEDBACK (для админа) -->
+    <div class="drink-modal-overlay" id="replyModal">
+        <div class="drink-modal">
+            <h2>Ответ на <span>обращение</span></h2>
+            <p id="replyModalSubtitle">Обращение №</p>
+
+            <div class="reply-modal-quote" id="replyModalQuote">
+                <!-- Текст обращения -->
+            </div>
+
+            <div class="form-group">
+                <label for="replyText">Ваш ответ</label>
+                <textarea id="replyText" class="reply-modal-textarea"
+                          placeholder="Напишите ответ пользователю..."></textarea>
+            </div>
+
+            <div class="promo-message" id="replyMessage"></div>
+
+            <div class="reply-modal-actions">
+                <button class="checkout-btn" id="replySubmitBtn">Отправить ответ</button>
+                <button class="drink-modal-close" onclick="closeReplyModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>ODOD <span>PIZZA</span></h4>
+                <p>Сервис доставки пиццы №1 в городе</p>
+                <p>Работаем с 2015 года</p>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                <a href="mailto:info@ododpizza.ru">info@ododpizza.ru</a>
+                <p>г. Москва, ул. Пиццевая, 1</p>
+            </div>
+            <div class="footer-col">
+                <h4>Мы в соцсетях</h4>
+                <a href="#">ВКонтакте</a>
+                <a href="#">Telegram</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 ODOD PIZZA. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

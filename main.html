@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odod Pizza — Доставка пиццы</title>
+    <link rel="stylesheet" href="pizza.css">
+    <style>
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 30px 120px;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #f4f2fb;
+            border-radius: 60px 60px 0 0;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .hero-text h1 span { color: #ffd166; }
+
+        .hero-text p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 35px;
+            max-width: 480px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pizza-circle {
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35),
+                        inset 0 0 0 12px rgba(255, 255, 255, 0.2);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .pizza-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+            margin-top: -60px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 35px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.25);
+        }
+
+        .feature-icon { font-size: 44px; margin-bottom: 15px; }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            font-size: 20px;
+        }
+
+        .feature-card p { color: #777; font-size: 15px; }
+
+        .menu {
+            background: #fff;
+            padding: 80px 30px;
+        }
+
+        .menu-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner, .features, .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 { font-size: 36px; }
+
+            .pizza-circle { width: 280px; height: 280px; }
+
+            .hero { padding: 60px 30px 100px; }
+
+            .features { margin-top: -40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <a href="main.html" class="logo">
+                <div class="logo-icon">🍕</div>
+                <div class="logo-text">ODOD <span>PIZZA</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="main.html" class="active">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="discounts.html">Акции</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="tel:+79991234567" class="nav-phone">+7 (999) 123-45-67</a>
+                <div id="authBlock"></div>
+                <a href="basket.html" class="cart-btn" title="Корзина">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>Вкусная пицца <span>за 30 минут</span></h1>
+                <p>Готовим из свежих продуктов и доставляем горячей прямо к вашей двери. Первая пицца — со скидкой 20%!</p>
+                <a href="menu.html" class="btn-primary">Смотреть меню</a>
+            </div>
+            <div class="hero-image">
+                <div class="pizza-circle">
+                    <img src="images/margarita.jpg" alt="Пицца">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Быстрая доставка</h3>
+            <p>Привозим горячую пиццу за 30 минут или она бесплатно</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔥</div>
+            <h3>Свежая выпечка</h3>
+            <p>Готовим каждую пиццу после вашего заказа</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3>Бесплатная доставка</h3>
+            <p>При заказе от 700 ₽ доставим бесплатно по всему городу</p>
+        </div>
+    </section>
+
+    <section class="menu">
+        <div class="menu-inner">
+            <h2 class="section-title">Наше <span>меню</span></h2>
+            <p class="section-subtitle">Выберите свою любимую пиццу</p>
+
+            <!-- Карточки подгружаются через JS -->
+            <div class="menu-grid" id="featuredPizzas"></div>
+        </div>
+    </section>
+
+    <section class="promo">
+        <div class="promo-inner">
+            <h2>Скидка 20% на первый заказ!</h2>
+            <p>Зарегистрируйтесь и получите промокод FIRST20 на скидку</p>
+            <a href="discounts.html" class="btn-light">Смотреть все акции</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>ODOD <span>PIZZA</span></h4>
+                <p>Сервис доставки пиццы №1 в городе</p>
+                <p>Работаем с 2015 года</p>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                <a href="mailto:info@ododpizza.ru">info@ododpizza.ru</a>
+                <p>г. Москва, ул. Пиццевая, 1</p>
+            </div>
+            <div class="footer-col">
+                <h4>Мы в соцсетях</h4>
+                <a href="#">ВКонтакте</a>
+                <a href="#">Telegram</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 ODOD PIZZA. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

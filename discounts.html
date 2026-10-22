@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акции — ODOD PIZZA</title>
+    <link rel="stylesheet" href="pizza.css">
+    <style>
+        .promo-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 30px 80px;
+        }
+
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .promo-card {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.25);
+        }
+
+        .promo-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-card-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .promo-card-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .promo-card-body h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .promo-card-body p {
+            color: #777;
+            font-size: 15px;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .promo-code {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f4f2fb;
+            border: 2px dashed #764ba2;
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+        }
+
+        .promo-code-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .promo-code-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: #764ba2;
+            letter-spacing: 2px;
+        }
+
+        .promo-code-copy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .promo-code-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .promo-card-wide {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .promo-card-wide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+
+        .promo-card-wide .promo-card-body {
+            padding: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-card-wide .promo-card-body h3 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .promo-card-wide .promo-card-body p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        .promo-card-wide .promo-code {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .promo-card-wide .promo-code-label {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .promo-card-wide .promo-code-value {
+            color: #ffd166;
+        }
+
+        .promo-card-wide .promo-code-copy {
+            background: #fff;
+            color: #764ba2;
+        }
+
+        .promo-card-wide .promo-card-image {
+            background: transparent;
+            font-size: 160px;
+            height: 100%;
+            min-height: 280px;
+        }
+
+        .promo-card-wide .btn-light {
+            align-self: flex-start;
+        }
+
+        .info-block {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px 80px;
+        }
+
+        .info-inner {
+            background: #fff;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+            text-align: center;
+        }
+
+        .info-inner h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .info-inner h2 span {
+            color: #764ba2;
+        }
+
+        .info-inner p {
+            color: #777;
+            font-size: 17px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .info-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-step {
+            text-align: center;
+        }
+
+        .info-step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 auto 15px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .info-step h4 {
+            font-size: 17px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .info-step p {
+            font-size: 14px;
+            color: #888;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .promo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .promo-card-wide {
+                grid-template-columns: 1fr;
+            }
+
+            .promo-card-wide .promo-card-body {
+                padding: 35px 25px;
+            }
+
+            .promo-card-wide .promo-card-body h3 {
+                font-size: 24px;
+            }
+
+            .promo-card-wide .promo-card-image {
+                font-size: 110px;
+                min-height: 180px;
+                order: -1;
+            }
+
+            .info-inner {
+                padding: 35px 25px;
+            }
+
+            .info-inner h2 {
+                font-size: 24px;
+            }
+
+            .info-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <a href="main.html" class="logo">
+                <div class="logo-icon">🍕</div>
+                <div class="logo-text">ODOD <span>PIZZA</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="main.html">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="discounts.html" class="active">Акции</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="tel:+79991234567" class="nav-phone">+7 (999) 123-45-67</a>
+                <div id="authBlock"></div>
+                <a href="basket.html" class="cart-btn" title="Корзина">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Наши <span>акции</span></h1>
+        <p>Скидки, промокоды и выгодные предложения для наших гостей</p>
+    </section>
+
+    <section class="promo-section">
+        <div class="promo-grid">
+
+            <div class="promo-card promo-card-wide">
+                <div class="promo-card-body">
+                    <h3>Скидка 20% на первый заказ!</h3>
+                    <p>Зарегистрируйтесь на сайте и получите промокод на первый заказ. Действует на любую пиццу из меню.</p>
+                    <div class="promo-code">
+                        <div>
+                            <div class="promo-code-label">Промокод</div>
+                            <div class="promo-code-value">FIRST20</div>
+                        </div>
+                        <button class="promo-code-copy" data-code="FIRST20">Копировать</button>
+                    </div>
+                    <a href="basket.html" class="btn-light">Перейти в корзину</a>
+                </div>
+                <div class="promo-card-image">🎁</div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-image">🍕🍕</div>
+                <div class="promo-card-body">
+                    <h3>2 пиццы по цене 1</h3>
+                    <p>Каждую среду при заказе двух пицц «Маргарита» — вторая в подарок.</p>
+                    <div class="promo-code">
+                        <div>
+                            <div class="promo-code-label">Промокод</div>
+                            <div class="promo-code-value">TWOPIZZA</div>
+                        </div>
+                        <button class="promo-code-copy" data-code="TWOPIZZA">Копировать</button>
+                    </div>
+                    <a href="basket.html" class="btn-small" style="text-decoration:none;">🛒 Перейти в корзину</a>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-image">💰</div>
+                <div class="promo-card-body">
+                    <h3>Скидка 10% на заказ</h3>
+                    <p>Примените промокод и получите скидку 10% на весь заказ.</p>
+                    <div class="promo-code">
+                        <div>
+                            <div class="promo-code-label">Промокод</div>
+                            <div class="promo-code-value">ORDER10</div>
+                        </div>
+                        <button class="promo-code-copy" data-code="ORDER10">Копировать</button>
+                    </div>
+                    <a href="basket.html" class="btn-small" style="text-decoration:none;">🛒 Перейти в корзину</a>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-image">🎉</div>
+                <div class="promo-card-body">
+                    <h3>Скидка 15% на сет</h3>
+                    <p>Закажите любой сет из 3 пицц и получите скидку 15%.</p>
+                    <div class="promo-code">
+                        <div>
+                            <div class="promo-code-label">Промокод</div>
+                            <div class="promo-code-value">SET15</div>
+                        </div>
+                        <button class="promo-code-copy" data-code="SET15">Копировать</button>
+                    </div>
+                    <a href="basket.html" class="btn-small" style="text-decoration:none;">🛒 Перейти в корзину</a>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-image">🥤</div>
+                <div class="promo-card-body">
+                    <h3>Бесплатный напиток</h3>
+                    <p>При заказе от 150 ₽ — напиток 0,5 л в подарок на выбор.</p>
+                    <div class="promo-code">
+                        <div>
+                            <div class="promo-code-label">Промокод</div>
+                            <div class="promo-code-value">DRINK</div>
+                        </div>
+                        <button class="promo-code-copy" data-code="DRINK">Копировать</button>
+                    </div>
+                    <a href="basket.html" class="btn-small" style="text-decoration:none;">🛒 Перейти в корзину</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="info-block">
+        <div class="info-inner">
+            <h2>Как использовать <span>промокод?</span></h2>
+            <p>Всё просто — выберите акцию, скопируйте промокод и укажите его при оформлении заказа в корзине.</p>
+
+            <div class="info-steps">
+                <div class="info-step">
+                    <div class="info-step-number">1</div>
+                    <h4>Выберите акцию</h4>
+                    <p>Найдите подходящую скидку в списке выше</p>
+                </div>
+                <div class="info-step">
+                    <div class="info-step-number">2</div>
+                    <h4>Скопируйте код</h4>
+                    <p>Нажмите «Копировать» — код попадёт в буфер обмена</p>
+                </div>
+                <div class="info-step">
+                    <div class="info-step-number">3</div>
+                    <h4>Примените в корзине</h4>
+                    <p>Введите код в поле «Промокод» и нажмите «Применить»</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>ODOD <span>PIZZA</span></h4>
+                <p>Сервис доставки пиццы №1 в городе</p>
+                <p>Работаем с 2015 года</p>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                <a href="mailto:info@ododpizza.ru">info@ododpizza.ru</a>
+                <p>г. Москва, ул. Пиццевая, 1</p>
+            </div>
+            <div class="footer-col">
+                <h4>Мы в соцсетях</h4>
+                <a href="#">ВКонтакте</a>
+                <a href="#">Telegram</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 ODOD PIZZA. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

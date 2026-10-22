@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню — ODOD PIZZA</title>
+    <link rel="stylesheet" href="pizza.css">
+    <style>
+        .categories {
+            position: sticky;
+            top: 82px;
+            z-index: 90;
+            background: #f4f2fb;
+            padding: 15px 30px;
+            margin: 0 auto 50px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.08);
+        }
+
+        .category-btn {
+            background: #fff;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            color: #764ba2;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .menu-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px 80px;
+            scroll-margin-top: 160px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .set-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            background: #f4f2fb;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+        }
+
+        .set-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .pizza-card:hover .set-image img {
+            transform: scale(1.08);
+        }
+
+        @media (max-width: 900px) {
+            .menu-grid { grid-template-columns: 1fr; }
+
+            .categories {
+                top: 0;
+                padding: 12px 15px;
+                gap: 8px;
+            }
+
+            .category-btn { padding: 10px 18px; font-size: 13px; }
+
+            .menu-section { scroll-margin-top: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <a href="main.html" class="logo">
+                <div class="logo-icon">🍕</div>
+                <div class="logo-text">ODOD <span>PIZZA</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="main.html">Главная</a></li>
+                <li><a href="menu.html" class="active">Меню</a></li>
+                <li><a href="discounts.html">Акции</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="tel:+79991234567" class="nav-phone">+7 (999) 123-45-67</a>
+                <div id="authBlock"></div>
+                <a href="basket.html" class="cart-btn" title="Корзина">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Наше <span>меню</span></h1>
+        <p>Пиццы, сеты и напитки — всё в одном месте</p>
+    </section>
+
+    <div class="categories" id="categories">
+        <a href="#pizzas" class="category-btn" data-target="pizzas">Пиццы</a>
+        <a href="#sets" class="category-btn" data-target="sets">Сеты</a>
+        <a href="#drinks" class="category-btn" data-target="drinks">Напитки</a>
+    </div>
+
+    <!-- ПИЦЦЫ -->
+    <section class="menu-section" id="pizzas">
+        <h2 class="section-title">Наши <span>пиццы</span></h2>
+        <p class="section-subtitle">Каждая готовится после вашего заказа</p>
+
+        <div class="menu-grid" id="pizzasGrid"></div>
+    </section>
+
+    <!-- СЕТЫ -->
+    <section class="menu-section" id="sets">
+        <h2 class="section-title">Выгодные <span>сеты</span></h2>
+        <p class="section-subtitle">3 пиццы по специальной цене</p>
+
+        <div class="menu-grid" id="setsGrid"></div>
+    </section>
+
+    <!-- НАПИТКИ -->
+    <section class="menu-section" id="drinks">
+        <h2 class="section-title">Освежающие <span>напитки</span></h2>
+        <p class="section-subtitle">Идеально дополнят вашу пиццу</p>
+
+        <div class="menu-grid" id="drinksGrid"></div>
+    </section>
+
+    <section class="promo">
+        <div class="promo-inner">
+            <h2>Не можете выбрать?</h2>
+            <p>Посмотрите наши акции — там есть выгодные предложения</p>
+            <a href="discounts.html" class="btn-light">Смотреть акции</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>ODOD <span>PIZZA</span></h4>
+                <p>Сервис доставки пиццы №1 в городе</p>
+                <p>Работаем с 2015 года</p>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                <a href="mailto:info@ododpizza.ru">info@ododpizza.ru</a>
+                <p>г. Москва, ул. Пиццевая, 1</p>
+            </div>
+            <div class="footer-col">
+                <h4>Мы в соцсетях</h4>
+                <a href="#">ВКонтакте</a>
+                <a href="#">Telegram</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 ODOD PIZZA. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

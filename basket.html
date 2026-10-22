@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина — ODOD PIZZA</title>
+    <link rel="stylesheet" href="pizza.css">
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <a href="main.html" class="logo">
+                <div class="logo-icon">🍕</div>
+                <div class="logo-text">ODOD <span>PIZZA</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="main.html">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="discounts.html">Акции</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="tel:+79991234567" class="nav-phone">+7 (999) 123-45-67</a>
+                <div id="authBlock"></div>
+                <a href="basket.html" class="cart-btn" title="Корзина">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Ваша <span>корзина</span></h1>
+        <p>Проверьте состав заказа перед оформлением</p>
+    </section>
+
+    <section class="basket-section">
+
+        <div class="basket-list">
+            <h2>Состав <span>заказа</span></h2>
+            <div id="basketItems"></div>
+        </div>
+
+        <div class="basket-total" id="basketTotal">
+            <h2>Итого</h2>
+
+            <div class="promo-input-block">
+                <label for="promoInput">Промокод</label>
+                <div class="promo-input-row">
+                    <input type="text" id="promoInput" placeholder="Введите код">
+                    <button class="promo-apply-btn" id="promoApplyBtn">Применить</button>
+                </div>
+                <div class="promo-message" id="promoMessage"></div>
+                <div id="promoActiveBlock"></div>
+            </div>
+
+            <div class="total-row">
+                <span>Товары (<span id="totalItems">0</span> шт.)</span>
+                <span id="itemsSum">0 ₽</span>
+            </div>
+
+            <div class="total-row discount" id="discountRow" style="display:none;">
+                <span>Скидка <span id="discountPercent"></span></span>
+                <span id="discountAmount">−0 ₽</span>
+            </div>
+
+            <div class="total-row free-item" id="freeItemRow" style="display:none;">
+                <span>🎁 <span id="freeItemName"></span></span>
+                <span>0 ₽</span>
+            </div>
+
+            <div class="total-row">
+                <span>Доставка</span>
+                <span id="delivery">—</span>
+            </div>
+
+            <div class="total-row total-final">
+                <span>К оплате</span>
+                <span id="totalPrice">0 ₽</span>
+            </div>
+
+            <button class="checkout-btn" id="checkoutBtn">Оформить заказ</button>
+            <button class="clear-btn" id="clearBtn">Очистить корзину</button>
+        </div>
+
+    </section>
+
+    <div class="drink-modal-overlay" id="drinkModal">
+        <div class="drink-modal">
+            <h2>Выберите <span>напиток</span> 🎁</h2>
+            <p>Он будет добавлен в корзину бесплатно</p>
+            <div class="drink-options" id="drinkOptions"></div>
+            <button class="drink-modal-close" onclick="closeDrinkModal()">Отмена</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>ODOD <span>PIZZA</span></h4>
+                <p>Сервис доставки пиццы №1 в городе</p>
+                <p>Работаем с 2015 года</p>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                <a href="mailto:info@ododpizza.ru">info@ododpizza.ru</a>
+                <p>г. Москва, ул. Пиццевая, 1</p>
+            </div>
+            <div class="footer-col">
+                <h4>Мы в соцсетях</h4>
+                <a href="#">ВКонтакте</a>
+                <a href="#">Telegram</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 ODOD PIZZA. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
