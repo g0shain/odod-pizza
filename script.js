@@ -51,6 +51,7 @@ function logout() {
     if (confirm('Выйти из профиля?')) {
         setCurrentUser(null);
         localStorage.removeItem('ododUnreadFeedback');
+        localStorage.removeItem('ododRecommendations'); // Чистим кэш рекомендаций при выходе
         location.reload();
     }
 }
@@ -158,7 +159,7 @@ function initRegisterPage() {
 }
 
 // ============================================
-// МЕНЮ И РЕКОМЕНДАЦИИ
+// МЕНЮ
 // ============================================
 async function loadMenu() {
     try {
@@ -218,7 +219,9 @@ async function initMenuRender() {
     }
 }
 
-// --- НОВАЯ ФУНКЦИЯ РЕКОМЕНДАЦИЙ ---
+// ============================================
+// ИИ РЕКОМЕНДАЦИИ (С КЭШЕМ)
+// ============================================
 async function loadRecommendations() {
     const user = getCurrentUser();
     const section = document.getElementById('recommendationsSection');
@@ -226,20 +229,55 @@ async function loadRecommendations() {
     
     if (!user || !section || !grid) return;
 
+    // 1. Проверяем кэш в localStorage
+    const cacheKey = 'ododRecommendations_' + user.login;
+    const cachedData = localStorage.getItem(cacheKey);
+
+    if (cachedData) {
+        try {
+            const parsed = JSON.parse(cachedData);
+            const now = new Date().getTime();
+            // Если прошло меньше 15 минут (900000 мс) — показываем из кэша
+            if (now - parsed.timestamp < 900000) {
+                if (parsed.data && parsed.data.length > 0) {
+                    grid.innerHTML = parsed.data.map(renderPizzaCard).join('');
+                    section.style.display = 'block';
+                    initAddToCartButtons();
+                }
+                return; // Выходим, сервер не дёргаем
+            }
+        } catch (e) { console.error('Ошибка чтения кэша', e); }
+    }
+
+    // 2. Если кэша нет или он устарел — идём на сервер
+    // Показываем спиннер загрузки
+    grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #764ba2; font-weight: 600; font-size: 18px;">⏳ ИИ подбирает для вас лучшее...</div>`;
+    section.style.display = 'block';
+
     try {
         const r = await fetch('/api/recommendations?user=' + encodeURIComponent(user.login));
         const d = await r.json();
         
         if (d.ok && d.recommendations && d.recommendations.length > 0) {
+            // Отрисовываем
             grid.innerHTML = d.recommendations.map(renderPizzaCard).join('');
-            section.style.display = 'block';
             initAddToCartButtons();
+            
+            // Сохраняем в кэш
+            const cacheData = {
+                timestamp: new Date().getTime(),
+                data: d.recommendations
+            };
+            localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+        } else {
+            // Если ИИ ничего не предложил (например, нет истории заказов)
+            section.style.display = 'none';
         }
     } catch (e) {
         console.error('Ошибка рекомендаций:', e);
+        section.style.display = 'none'; // Скрываем при ошибке
     }
 }
-
 // ============================================
 // КОРЗИНА
 // ============================================
@@ -585,6 +623,7 @@ function initBasketPage() {
             if (data.ok) {
                 alert('✅ Заказ оформлен! Спасибо за покупку!');
                 localStorage.removeItem('ododCart'); localStorage.removeItem('ododPromo'); localStorage.removeItem('ododGiftDrink');
+                localStorage.removeItem('ododRecommendations_' + user.login); // Сбрасываем кэш, т.к. появился новый заказ
                 updateCartCount(); renderBasket(); window.location.href = 'profile.html';
             } else { alert('❌ ' + (data.error || 'Не удалось оформить заказ')); }
         } catch (e) { alert('❌ Ошибка соединения с сервером'); }
@@ -595,7 +634,6 @@ function initBasketPage() {
     renderBasket();
     if (getPromo() === 'DRINK' && !getGiftDrink()) openDrinkModal();
 }
-
 // ============================================
 // ПРОФИЛЬ
 // ============================================
@@ -783,7 +821,9 @@ function renderFeedbackCardAdmin(f) {
         </div>
     `;
 }
-
+// ============================================
+// МОДАЛКА ОТЗЫВА
+// ============================================
 function openReviewModal(orderId) {
     const modal = document.getElementById('reviewModal');
     if (!modal) return;
@@ -827,6 +867,9 @@ async function submitReview() {
     } catch (e) { msg.className = 'promo-message error'; msg.textContent = '❌ Ошибка'; }
 }
 
+// ============================================
+// АДМИН — ВКЛАДКИ
+// ============================================
 function renderAdminTabs() {
     const tabs = document.getElementById('profileTabsBlock');
     tabs.innerHTML = `<div class="profile-tabs"><button class="profile-tab ${currentAdminTab === 'orders' ? 'active' : ''}" data-tab="orders">📦 Заказы</button><button class="profile-tab ${currentAdminTab === 'reviews' ? 'active' : ''}" data-tab="reviews">⭐ Отзывы</button><button class="profile-tab ${currentAdminTab === 'feedback' ? 'active' : ''}" data-tab="feedback">📩 Feedback</button></div>`;
@@ -879,6 +922,9 @@ async function renderAdminFeedback() {
     content.querySelectorAll('[data-delete]').forEach(btn => { btn.addEventListener('click', async function() { if (!confirm('Удалить обращение?')) return; await fetch('/api/feedback/delete', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ admin: user.login, fbId: parseInt(this.dataset.delete) }) }); renderAdminFeedback(); }); });
 }
 
+// ============================================
+// МОДАЛКА ОТВЕТА И ИИ
+// ============================================
 function openReplyModal(fbId) {
     const modal = document.getElementById('replyModal');
     if (!modal) return;
@@ -942,7 +988,7 @@ async function suggestAiReply() {
 function declineReviews(n) { const m10 = n % 10; const m100 = n % 100; if (m10 === 1 && m100 !== 11) return 'отзыв'; if ([2,3,4].includes(m10) && ![12,13,14].includes(m100)) return 'отзыва'; return 'отзывов'; }
 
 // ============================================
-// ЭКСПОРТ И ИНИЦИАЛИЗАЦИЯ
+// КОНТАКТЫ, КОПИРОВАНИЕ И КАТЕГОРИИ
 // ============================================
 function initContactForm() {
     const area = document.getElementById('contactFormArea');
@@ -976,6 +1022,9 @@ function initMenuCategories() {
     window.addEventListener('scroll', updateActiveByScroll); window.addEventListener('load', updateActiveByScroll); updateActiveByScroll();
 }
 
+// ============================================
+// ИНИЦИАЛИЗАЦИЯ
+// ============================================
 window.changeQuantity = changeQuantity; window.removeItem = removeItem; window.removePromo = removePromo; window.selectGiftDrink = selectGiftDrink; window.closeDrinkModal = closeDrinkModal; window.closeReviewModal = closeReviewModal; window.closeReplyModal = closeReplyModal; window.logout = logout;
 
 document.addEventListener('DOMContentLoaded', async function() {
